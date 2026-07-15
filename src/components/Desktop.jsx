@@ -1775,7 +1775,7 @@ function DesktopIcon({ title, icon: Icon, onClick, isOpen, style = {} }) {
       onClick={onClick}
       style={{
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
-        cursor: 'pointer', textAlign: 'center', padding: '4px', width: '75px', height: '65px',
+        cursor: 'pointer', textAlign: 'center', padding: '2px', width: '75px', height: '75px',
         border: '1px dashed transparent', transition: 'all 0.1s'
       }}
       onMouseEnter={(e) => e.currentTarget.style.border = '1px dashed #ffffff'}
@@ -1783,7 +1783,7 @@ function DesktopIcon({ title, icon: Icon, onClick, isOpen, style = {} }) {
     >
       <div 
         style={{
-          width: '32px', height: '32px', backgroundColor: isOpen ? '#ffd3dc' : '#ffffff',
+          width: '32px', height: '32px', backgroundColor: isOpen ? '#ffe4e6' : '#ffffff',
           border: '2px solid #000', boxShadow: '2px 2px 0px rgba(0, 0, 0, 0.15)',
           display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--pixel-red)',
           marginBottom: '3px', transition: 'all 0.1s', ...style
@@ -1793,8 +1793,14 @@ function DesktopIcon({ title, icon: Icon, onClick, isOpen, style = {} }) {
       </div>
       <span 
         style={{
-          fontFamily: 'var(--font-pixel)', fontSize: '6px', color: '#000',
-          textShadow: '1px 1px 0px #fff', lineHeight: '1.2', wordBreak: 'break-word', maxWidth: '70px'
+          fontFamily: 'var(--font-pixel)', 
+          fontSize: '9px', 
+          color: '#ffffff',
+          textShadow: '1px 1px 0px #000, -1px -1px 0px #000, 1px -1px 0px #000, -1px 1px 0px #000', 
+          lineHeight: '1.3', 
+          wordBreak: 'break-word', 
+          maxWidth: '75px',
+          marginTop: '4px'
         }}
       >
         {title}

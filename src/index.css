@@ -914,3 +914,14 @@ body {
   0% { transform: scale(1); opacity: 1; }
   100% { transform: scale(30); opacity: 0; }
 }
+
+/* Scrollable sidebar support */
+.desktop-sidebar {
+  max-height: calc(100vh - 75px);
+  overflow-y: auto;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  padding-bottom: 20px;
+}
+.desktop-sidebar::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome/Safari/Vite */
+}
