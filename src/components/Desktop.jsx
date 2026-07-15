@@ -932,6 +932,8 @@ function VirtualGardenApp({ onGardenBloom }) {
     { id: 4, type: 'Lily', renderIcon: () => <LilySVG />, state: 'empty', water: 0, text: "You're my favorite person." }
   ]);
   const [waterCount, setWaterCount] = useState(15);
+  const [showTwist, setShowTwist] = useState(false);
+  const [hasTriggeredTwist, setHasTriggeredTwist] = useState(false);
 
   const waterPlant = (id) => {
     const targetSlot = garden.find(slot => slot.id === id);
@@ -961,8 +963,15 @@ function VirtualGardenApp({ onGardenBloom }) {
   const allBloomed = garden.every(slot => slot.state === 'bloom');
 
   useEffect(() => {
-    if (allBloomed && onGardenBloom) {
-      onGardenBloom();
+    if (allBloomed) {
+      if (onGardenBloom) onGardenBloom();
+      if (!hasTriggeredTwist) {
+        setTimeout(() => {
+          sound.playSuccess();
+          setShowTwist(true);
+          setHasTriggeredTwist(true);
+        }, 800);
+      }
     }
   }, [allBloomed]);
 
@@ -1102,6 +1111,55 @@ function VirtualGardenApp({ onGardenBloom }) {
           )}
         </div>
       </div>
+
+      {/* Boyfriend of the Decade Twist Overlay [NEW] */}
+      {showTwist && (
+        <div 
+          className="retro-window"
+          style={{
+            position: 'absolute',
+            top: '10px',
+            left: '10px',
+            right: '10px',
+            bottom: '10px',
+            zIndex: 1000,
+            backgroundColor: '#fff0f3',
+            border: '3px double var(--pixel-red)',
+            padding: '15px',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            textAlign: 'center',
+            boxShadow: '0 0 20px rgba(0,0,0,0.3)'
+          }}
+        >
+          <div style={{ fontSize: '32px', marginBottom: '8px' }} className="heart-beat">🏆</div>
+          <h3 style={{ fontFamily: 'var(--font-pixel)', fontSize: '9px', color: 'var(--pixel-red)', marginBottom: '12px' }}>
+            100% HAPPINESS BLOOMED!
+          </h3>
+          
+          <div style={{ border: '2px solid #000', padding: '12px', backgroundColor: '#fff', borderRadius: '4px', maxWidth: '340px', width: '100%' }}>
+            <p style={{ fontSize: '7.5px', fontFamily: 'var(--font-pixel)', color: '#666', marginBottom: '6px' }}>
+              CERTIFICATE OF ENDLESS LOVE
+            </p>
+            <h4 style={{ fontWeight: 'bold', fontSize: '13.5px', color: '#111', marginBottom: '6px' }}>
+              Boyfriend of the Year 📜
+            </h4>
+            <p style={{ fontSize: '11px', color: '#444', lineHeight: '1.45', fontStyle: 'italic' }}>
+              "Awarded to Dharani's favorite human for successfully blooming our garden to 100%, handling her dramatic fights, and loving her unconditionally."
+            </p>
+          </div>
+
+          <button 
+            className="retro-button primary" 
+            onClick={() => setShowTwist(false)}
+            style={{ marginTop: '15px', fontSize: '10px', padding: '5px 15px', cursor: 'pointer' }}
+          >
+            Claim My Endless Hugs! ❤️
+          </button>
+        </div>
+      )}
     </div>
   );
 }
