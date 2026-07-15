@@ -180,7 +180,7 @@ function DesktopWindow({
 export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMuted, onClockClick }) {
   const [openWindows, setOpenWindows] = useState({
     letter: true,
-    garden: true,
+    garden: false,
     song: true,
     wrapped: false,
     capsule: false,
@@ -407,7 +407,7 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
 
       {/* love_letter.txt */}
       {openWindows.letter && !minimizedWindows.letter && (
-        <DesktopWindow id="letter" title="love_letter.txt" icon={MessageSquare} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={140} initialY={65} width="400px" height="425px">
+        <DesktopWindow id="letter" title="love_letter.txt" icon={MessageSquare} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={280} initialY={75} width="580px" height="480px">
           <LoveLetterApp />
         </DesktopWindow>
       )}
@@ -614,7 +614,7 @@ function LoveLetterApp() {
       style={{ 
         height: '100%', overflowY: 'auto', display: 'flex', flexDirection: 'column',
         fontFamily: 'var(--font-sans)', backgroundImage: 'linear-gradient(rgba(255, 230, 235, 0.4) 1px, transparent 1px)',
-        backgroundSize: '100% 24px', lineHeight: '24px', padding: '15px', border: '2px solid var(--shadow-dark)',
+        backgroundSize: '100% 28px', lineHeight: '28px', padding: '22px', border: '2px solid var(--shadow-dark)',
         position: 'relative', backgroundColor: '#fffbfb'
       }}
     >
@@ -642,8 +642,8 @@ function LoveLetterApp() {
       <div 
         className={!isDone ? "typing-cursor" : ""}
         style={{ 
-          textAlign: 'left', width: '100%', fontSize: '13px', fontWeight: 400,
-          color: '#2a2a2a', lineHeight: '1.5'
+          textAlign: 'left', width: '100%', fontSize: '15.5px', fontWeight: 400,
+          color: '#2a2a2a', lineHeight: '1.65'
         }}
       >
         {renderFormattedText(displayText)}
