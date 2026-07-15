@@ -1452,6 +1452,156 @@ function RecycleBinApp({ onTriggerBSOD }) {
   );
 }
 
+// ----------------------------------------------------
+// HEART CATCHER GAME APP
+// ----------------------------------------------------
+function HeartCatcherGame() {
+  const [score, setScore] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [heartPos, setHeartPos] = useState({ x: 50, y: 0 });
+  const [bucketX, setBucketX] = useState(50); // percentage 0-100
+  const gameAreaRef = useRef(null);
+
+  // Keyboard controls
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!isPlaying) return;
+      if (e.key === 'ArrowLeft') {
+        setBucketX(prev => Math.max(0, prev - 8));
+      } else if (e.key === 'ArrowRight') {
+        setBucketX(prev => Math.min(90, prev + 8));
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isPlaying]);
+
+  // Game loop
+  useEffect(() => {
+    if (!isPlaying) return;
+
+    const interval = setInterval(() => {
+      setHeartPos(prev => {
+        const newY = prev.y + 1.8; // Slow fallback speed as requested
+        
+        // If heart reaches the bottom
+        if (newY >= 85) {
+          const heartX = prev.x;
+          const bucketLeft = bucketX;
+          const bucketRight = bucketX + 15;
+
+          if (heartX >= bucketLeft && heartX <= bucketRight) {
+            sound.playSuccess();
+            setScore(s => s + 1);
+          } else {
+            sound.playHit();
+          }
+
+          // Spawn new heart at random x
+          return { x: Math.floor(Math.random() * 85), y: 0 };
+        }
+
+        return { ...prev, y: newY };
+      });
+    }, 30); // 30ms tick rate
+
+    return () => clearInterval(interval);
+  }, [isPlaying, bucketX]);
+
+  const startGame = () => {
+    sound.playClick();
+    setScore(0);
+    setHeartPos({ x: Math.floor(Math.random() * 85), y: 0 });
+    setIsPlaying(true);
+  };
+
+  return (
+    <div className="retro-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', border: '2px solid var(--shadow-dark)', padding: '10px', justifyContent: 'space-between', backgroundColor: '#fff5f7' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '2px dashed var(--pixel-pink)', paddingBottom: '6px', marginBottom: '8px' }}>
+        <span style={{ fontSize: '10px', fontFamily: 'var(--font-pixel)', color: 'var(--pixel-red)', fontWeight: 'bold' }}>
+          ❤️ SCORE: {score} / 10
+        </span>
+        <span style={{ fontSize: '8px', color: '#666' }}>Use Left/Right Arrows</span>
+      </div>
+
+      {score >= 10 ? (
+        <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '20px', gap: '15px' }}>
+          <div style={{ fontSize: '40px' }} className="heart-beat">🏆❤️</div>
+          <h4 style={{ fontWeight: 'bold', color: 'var(--pixel-red)', fontSize: '15px' }}>You Won My Whole Heart!</h4>
+          <p style={{ fontSize: '11px', color: '#555', lineHeight: '1.4', fontStyle: 'italic', background: '#fff', border: '1px dashed #ec4899', padding: '10px', borderRadius: '4px' }}>
+            "No matter how many hearts fall, you'll always catch mine. You are my greatest win. I love you, Golduhhhh! ❤️"
+          </p>
+          <button className="retro-button primary" onClick={startGame} style={{ fontSize: '10px', padding: '6px 15px' }}>
+            Play Again
+          </button>
+        </div>
+      ) : isPlaying ? (
+        <div 
+          ref={gameAreaRef}
+          style={{ 
+            flexGrow: 1, background: '#fee2e2', border: '2px solid #000', 
+            position: 'relative', overflow: 'hidden', height: '220px', borderRadius: '4px' 
+          }}
+        >
+          {/* Falling Heart */}
+          <div 
+            style={{ 
+              position: 'absolute', left: `${heartPos.x}%`, top: `${heartPos.y}%`, 
+              fontSize: '24px', transition: 'top 0.03s linear' 
+            }}
+          >
+            ❤️
+          </div>
+
+          {/* Catching Bucket */}
+          <div 
+            style={{ 
+              position: 'absolute', bottom: '5px', left: `${bucketX}%`, 
+              width: '50px', height: '18px', background: 'var(--pixel-red)', 
+              border: '2px solid #000', borderRadius: '0 0 8px 8px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              boxShadow: '1px 2px 0 rgba(0,0,0,0.1)'
+            }}
+          >
+            <span style={{ fontSize: '7px', color: 'white', fontWeight: 'bold', fontFamily: 'var(--font-pixel)' }}>CATCH</span>
+          </div>
+        </div>
+      ) : (
+        <div style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', gap: '15px' }}>
+          <div style={{ fontSize: '32px' }} className="heart-beat">🧺❤️</div>
+          <h4 style={{ fontWeight: 'bold', fontSize: '13px' }}>Catch the Falling Hearts!</h4>
+          <p style={{ fontSize: '11px', color: '#666', lineHeight: '1.4', maxWidth: '280px' }}>
+            Catch 10 hearts to reveal a special note! Use Left/Right Arrow keys or the controls below.
+          </p>
+          <button className="retro-button primary" onClick={startGame} style={{ fontSize: '11px', padding: '6px 20px' }}>
+            Start Game
+          </button>
+        </div>
+      )}
+
+      {/* Control Buttons for Mobile/Easy Clicks */}
+      {isPlaying && score < 10 && (
+        <div style={{ display: 'flex', justifyContent: 'space-around', marginTop: '10px', gap: '15px' }}>
+          <button 
+            className="retro-button" 
+            onClick={() => setBucketX(prev => Math.max(0, prev - 12))}
+            style={{ flexGrow: 1, padding: '8px 0', fontSize: '12px', fontWeight: 'bold' }}
+          >
+            ◀ Move Left
+          </button>
+          <button 
+            className="retro-button" 
+            onClick={() => setBucketX(prev => Math.min(90, prev + 12))}
+            style={{ flexGrow: 1, padding: '8px 0', fontSize: '12px', fontWeight: 'bold' }}
+          >
+            Move Right ▶
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // Sidebar Icon Component
 function DesktopIcon({ title, icon: Icon, onClick, isOpen, style = {} }) {
   return (
