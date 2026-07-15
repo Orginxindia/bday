@@ -177,7 +177,7 @@ function DesktopWindow({
   );
 }
 
-export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMuted, onClockClick }) {
+export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMuted, onClockClick, onReadLetter }) {
   const [openWindows, setOpenWindows] = useState({
     letter: true,
     garden: false,
@@ -278,6 +278,20 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
       minimizeWindow(id);
     } else {
       setActiveWindow(id);
+    }
+  };
+
+  const handleReadLetter = () => {
+    setOpenWindows(prev => ({
+      ...prev,
+      letter: false,
+      garden: true,
+      song: true,
+      timeline: true
+    }));
+    setActiveWindow('garden');
+    if (onReadLetter) {
+      onReadLetter();
     }
   };
 
@@ -408,7 +422,7 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
       {/* love_letter.txt */}
       {openWindows.letter && !minimizedWindows.letter && (
         <DesktopWindow id="letter" title="love_letter.txt" icon={MessageSquare} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={280} initialY={75} width="580px" height="480px">
-          <LoveLetterApp />
+          <LoveLetterApp onReadLetter={handleReadLetter} />
         </DesktopWindow>
       )}
 
@@ -562,7 +576,7 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
 // ----------------------------------------------------
 // 1. LOVE LETTER APP
 // ----------------------------------------------------
-function LoveLetterApp() {
+function LoveLetterApp({ onReadLetter }) {
   const [displayText, setDisplayText] = useState('');
   const [isDone, setIsDone] = useState(false);
   const letterText = `**Happy 20th Birthday, My Love ❤️**\n\nMy Dearest,\n\nHappy 20th Birthday to the most beautiful soul I've ever known.\n\nSometimes I wonder how I got so lucky. Even after all these years, I still get butterflies every time I see you. People say crushes fade with time, but somehow... mine only grew stronger. You're not just my girlfriend anymore—you'll forever be my favorite person, my safest place, and still the girl I have a crush on every single day.\n\nWatching you step into your twenties fills me with so much pride. I pray this new chapter brings you endless happiness, success, peace, and every dream you've ever wished for.\n\nNo matter what life throws at us, I promise one thing—I will always have your back. During your happiest moments, your hardest days, your biggest victories, and your lowest points... you will never have to face them alone.\n\nThank you for choosing me. Thank you for loving me.\n\nHappy Birthday, my angel.\n\nI love you today.\nI loved you yesterday.\nAnd I'll continue loving you tomorrow.\n\nForever yours,\n\nDharani ❤️`;
@@ -643,11 +657,32 @@ function LoveLetterApp() {
         className={!isDone ? "typing-cursor" : ""}
         style={{ 
           textAlign: 'left', width: '100%', fontSize: '15.5px', fontWeight: 400,
-          color: '#2a2a2a', lineHeight: '1.65'
+          color: '#2a2a2a', lineHeight: '1.65', marginBottom: isDone ? '15px' : '0px'
         }}
       >
         {renderFormattedText(displayText)}
       </div>
+
+      {isDone && (
+        <button 
+          className="retro-button primary heart-beat" 
+          onClick={onReadLetter}
+          style={{ 
+            alignSelf: 'center', 
+            marginTop: '15px', 
+            padding: '8px 25px', 
+            fontSize: '12px',
+            backgroundColor: 'var(--pixel-red)',
+            color: 'white',
+            fontWeight: 'bold',
+            border: '2px solid #000',
+            boxShadow: '2px 2px 0px #000',
+            cursor: 'pointer'
+          }}
+        >
+          ❤️ I Read It!
+        </button>
+      )}
     </div>
   );
 }

@@ -391,6 +391,11 @@ export default function App() {
           isMuted={isMuted}
           setIsMuted={setIsMuted}
           onClockClick={handleClockClick}
+          onReadLetter={() => {
+            sound.playSuccess();
+            setShowFireworks(true);
+            setIsGardenBloomed(true);
+          }}
         />
       )}
 
