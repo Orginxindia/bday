@@ -925,3 +925,142 @@ body {
 .desktop-sidebar::-webkit-scrollbar {
   display: none; /* Hide scrollbar for Chrome/Safari/Vite */
 }
+
+/* ==========================================
+   200% MOBILE RESPONSIVE OVERRIDES
+   ========================================== */
+@media (max-width: 768px) {
+  /* 1. Body and Workspace layout */
+  body {
+    overflow: hidden !important; /* Prevent body scroll issues */
+  }
+
+  .desktop-workspace {
+    padding: 45px 8px 85px 8px !important; /* Left space for horizontal sidebar, top space for taskbar */
+  }
+
+  /* 2. Horizontal scrollable dock for sidebar shortcuts */
+  .desktop-sidebar {
+    position: absolute !important;
+    bottom: 5px !important;
+    top: auto !important;
+    left: 5px !important;
+    right: 5px !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    width: auto !important;
+    height: 78px !important;
+    gap: 8px !important;
+    background-color: rgba(255, 255, 255, 0.95) !important;
+    border: 2px solid var(--shadow-darker) !important;
+    border-radius: 6px !important;
+    padding: 2px 6px !important;
+    z-index: 4500 !important;
+    box-shadow: 0px -4px 15px rgba(0,0,0,0.15) !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    scrollbar-width: none !important; /* Firefox */
+  }
+
+  .desktop-sidebar::-webkit-scrollbar {
+    display: none !important; /* Hide scrollbar for Chrome/Safari */
+  }
+
+  .desktop-icon-btn {
+    width: 60px !important;
+    height: 70px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .desktop-icon-btn span {
+    font-size: 7.5px !important;
+    max-width: 58px !important;
+  }
+
+  /* 3. Maximized Windows for mobile comfort */
+  .retro-window {
+    width: calc(100vw - 12px) !important;
+    height: calc(100vh - 135px) !important; /* Leaves taskbar (35px) and dock (80px) visible */
+    left: 6px !important;
+    top: 40px !important;
+    transform: none !important;
+  }
+
+  /* Adjust internal panels for smaller screens */
+  .retro-panel {
+    padding: 6px !important;
+  }
+
+  /* Hide digital clock & sticky notes to save space */
+  .clock-widget, .sticky-note {
+    display: none !important;
+  }
+
+  /* 4. Taskbar scaling */
+  .retro-taskbar {
+    font-size: 8px !important;
+    height: 32px !important;
+    padding: 0 8px !important;
+  }
+  
+  .taskbar-left span {
+    font-size: 8px !important;
+  }
+
+  .taskbar-battery {
+    font-size: 8px !important;
+  }
+
+  /* 5. Specific app responsiveness overrides */
+  /* Surprises grid on mobile: 3 columns instead of 5 to fit screens */
+  .retro-window-body div[style*="display: grid"],
+  .retro-window-body div[style*="display:grid"] {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+
+  /* Heart catcher controls adjustment */
+  .retro-window-body button {
+    padding: 6px 10px !important;
+    font-size: 10px !important;
+  }
+  
+  /* Timeline lines scaling */
+  .milestone-item {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+  }
+
+  /* Intro Window Scaling */
+  .IntroScreen-container {
+    height: auto !important;
+    min-height: 380px !important;
+    padding: 10px !important;
+  }
+
+  .IntroScreen-container h1 {
+    font-size: 24px !important;
+  }
+
+  .IntroScreen-container p {
+    font-size: 9px !important;
+    margin-bottom: 20px !important;
+  }
+
+  .IntroScreen-container .intro-actions {
+    gap: 15px !important;
+  }
+
+  /* Locked Folder Layout adjust */
+  .forever-grid {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Login window centering */
+  .login-screen .retro-window {
+    width: 90% !important;
+    max-width: 320px !important;
+  }
+}
