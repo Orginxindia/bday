@@ -205,7 +205,14 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
   const [scatteredNotes, setScatteredNotes] = useState([
     { id: 1, top: '120px', right: '320px', rotation: '-2deg', title: "Sweet Thought", text: "You are the primary reason I look forward to tomorrow. ❤️", isOpen: false },
     { id: 2, top: '480px', left: '160px', rotation: '3deg', title: "Cute Reminder", text: "Your smile is literally my favorite thing in the whole world. 😊", isOpen: false },
-    { id: 3, top: '240px', left: '500px', rotation: '-1deg', title: "Secret Note", text: "I fell in love with your soul before I could even hold your hand. 🌸", isOpen: false }
+    { id: 3, top: '240px', left: '500px', rotation: '-1deg', title: "Secret Note", text: "I fell in love with your soul before I could even hold your hand. 🌸", isOpen: false },
+    { id: 4, top: '100px', left: '260px', rotation: '4deg', title: "Cheesy Spark", text: "Are you a magician? Because whenever I look at you, everyone else disappears. ✨", isOpen: false },
+    { id: 5, top: '380px', right: '140px', rotation: '-3deg', title: "Sweet Fact", text: "If I could rank my favorite things, your laugh is #1, and you are #0. ❤️", isOpen: false },
+    { id: 6, top: '530px', right: '420px', rotation: '2deg', title: "Pickup Line", text: "Do you have a map? Because I keep getting lost in your eyes. 👀", isOpen: false },
+    { id: 7, top: '280px', right: '280px', rotation: '-4deg', title: "Cute Line", text: "My heart beats in 120 FPS whenever you text me. 💓", isOpen: false },
+    { id: 8, top: '160px', left: '720px', rotation: '2deg', title: "Secret note", text: "Are you Wi-Fi? Because I'm feeling a really strong connection. 📶", isOpen: false },
+    { id: 9, top: '440px', left: '550px', rotation: '-2deg', title: "Warm Thought", text: "You're like my favorite song—I could listen to you on repeat forever. 🎵", isOpen: false },
+    { id: 10, top: '90px', left: '440px', rotation: '3deg', title: "Pickup Line", text: "I must be a snowflake, because I've fallen for you. ❄️❤️", isOpen: false }
   ]);
 
   const [couponStatus, setCouponStatus] = useState({ hug: false, date: false, movie: false, call: false, wish: false, cuddles: false });
