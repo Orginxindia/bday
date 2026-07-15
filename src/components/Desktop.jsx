@@ -190,7 +190,8 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
     timeline: false,
     dreams: false,
     reasons: false,
-    forever: false
+    forever: false,
+    counter: false
   });
   
   const [minimizedWindows, setMinimizedWindows] = useState({});
@@ -349,6 +350,7 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
         <DesktopIcon title="Future Dreams" icon={Sparkles} onClick={() => openWindow('dreams')} isOpen={openWindows.dreams} style={{ color: '#f59e0b' }} />
         <DesktopIcon title="I Love You" icon={Heart} onClick={() => openWindow('reasons')} isOpen={openWindows.reasons} style={{ color: '#ef4444' }} />
         <DesktopIcon title="Forever Folder" icon={Folder} onClick={() => openWindow('forever')} isOpen={openWindows.forever} style={{ color: '#10b981' }} />
+        <DesktopIcon title="Love Counter" icon={Heart} onClick={() => openWindow('counter')} isOpen={openWindows.counter} style={{ color: '#ec4899' }} />
         
         <DesktopIcon title="Recycle Bin" icon={Trash2} onClick={() => openWindow('recycle')} isOpen={openWindows.recycle} style={{ color: '#888' }} />
       </div>
@@ -536,6 +538,13 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
       {openWindows.forever && !minimizedWindows.forever && (
         <DesktopWindow id="forever" title="Forever Lockbox" icon={Folder} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={220} initialY={180} width="380px" height="280px">
           <ForeverFolderApp onTriggerBSOD={onTriggerBSOD} />
+        </DesktopWindow>
+      )}
+
+      {/* Love Counter Window [NEW] */}
+      {openWindows.counter && !minimizedWindows.counter && (
+        <DesktopWindow id="counter" title="love_counter.exe" icon={Heart} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={200} initialY={160} width="400px" height="340px">
+          <RelationshipCounterApp />
         </DesktopWindow>
       )}
 
@@ -793,16 +802,16 @@ function SurprisesApp() {
     { id: 8, type: "Promise", title: "promise.txt", content: "One Promise\n\nLife won't always be perfect.\n\nThere will be difficult days.\n\nUnexpected problems.\n\nMoments where everything feels heavy.\n\nBut I want you to remember one thing.\n\nYou'll never walk through them alone.\n\nI will always stand beside you.\n\nNot because I have to.\n\nBecause I want to.\n\nBecause loving you means choosing you...\n\nEvery single day. 🤝" },
     { id: 9, type: "Future", title: "future.exe", content: "Our Future\n\nMore walks.\n\nMore ice creams.\n\nMore birthdays.\n\nMore road trips.\n\nMore photos.\n\nMore hugs.\n\nMore dreams.\n\nMore achievements.\n\nMore laughter.\n\nMore \"I love you.\"\n\nAnd hopefully...\n\nMany more years together. 🌎" },
     { id: 10, type: "BirthdayMsg", title: "birthday_message.txt", content: "Welcome to Your Twenties ❤️\n\nHappy 20th Birthday, my love.\n\nMay this decade become the most beautiful chapter of your life.\n\nMay you smile more.\n\nCry less.\n\nDream bigger.\n\nTravel farther.\n\nLaugh louder.\n\nLove deeper.\n\nAnd may every dream you've ever whispered to yourself become reality.\n\nI'll always be cheering for you.\n\nAlways believing in you.\n\nAlways loving you.\n\nHappy Birthday, My Angel. 🎂" },
-    { id: 11, type: "Quote", title: "sweet_quote.txt", content: "📜 'In a world full of temporary things, you are my forever.'" },
-    { id: 12, type: "Sketch", title: "midnight_walk.exe", content: "🖼️ Evening Walk Memory: Two silhouettes walking under star-filled skies." },
-    { id: 13, type: "Voice Note", title: "voice_note_1.wav", content: "🎙️ Voice: 'Happy Birthday to my favorite human in the entire universe!'" },
-    { id: 14, type: "Memory", title: "first_date.txt", content: "🌸 Memory: Getting caught in the sudden rain and sharing one tiny umbrella." },
-    { id: 15, type: "Quote", title: "quote_2.txt", content: "📜 'Before you came, I thought happiness was a moment. Now I know it is a person, and that person is you.'" },
-    { id: 16, type: "Message", title: "love_note_2.txt", content: "You make ordinary moments feel like absolute magic. ✨" },
-    { id: 17, type: "Countdown", title: "milestone.txt", content: "⏳ Hours spent laughing together: 5,000+ and counting!" },
-    { id: 18, type: "Memory", title: "movie_night.txt", content: "🍿 Memory: Staying up all night debating movie plots and sharing popcorn." },
-    { id: 19, type: "Animation", title: "sparkles.exe", content: "✨ [Sparkle Stars] Shimmering to light up your special day." },
-    { id: 20, type: "Final Surprise", title: "final_gift.exe", content: "🎉 Happy 20th Birthday, My Love! You are my entire heart and greatest blessing. Dharani ❤️" }
+    { id: 11, type: "Us", title: "The Day We Became Us ❤️", content: "The Day We Became Us\n\nThis wasn't just another date on the calendar. This was the day our love story officially began. 10.12.2022 ❤️" },
+    { id: 12, type: "Years", title: "Four Beautiful Years ⏳", content: "Four Beautiful Years\n\nAlmost four years of memories, laughter, little fights, endless love, growth, and choosing each other every single day." },
+    { id: 13, type: "Miss You", title: "Every 'I Miss You' 🥺", content: "Every 'I Miss You'\n\nDistance was never measured in kilometers. It was measured by how much I missed hearing your voice and seeing your smile." },
+    { id: 14, type: "Fights", title: "Every Little Fight ❤️", content: "Every Little Fight\n\nWe argued. We got upset. But somehow, every misunderstanding only taught us how to love each other better." },
+    { id: 15, type: "Laugh", title: "Every Laugh 😂", content: "Every Laugh\n\nYour laughter became my favorite sound. If I could keep one sound forever, it would be you laughing." },
+    { id: 16, type: "Thanks", title: "Thank You 🌸", content: "Thank You\n\nThank you for believing in me when I couldn't believe in myself. Thank you for loving every version of me." },
+    { id: 17, type: "Crush", title: "You're Still My Crush 💖", content: "You're Still My Crush\n\nPeople say you stop having a crush after you start dating. I never did. Every single day, I still look at you like the first time I saw you." },
+    { id: 18, type: "Promise", title: "My Promise 🤝", content: "My Promise\n\nNo matter where life takes us, no matter how difficult things become, I've always got your back. Your victories will be my celebrations, and your struggles will never be yours alone." },
+    { id: 19, type: "Future", title: "Our Future 🌍", content: "Our Future\n\nMore birthdays. More random walks. More late-night calls. More adventures. More dreams. More memories. And hopefully... a lifetime together." },
+    { id: 20, type: "Forever", title: "Forever ❤️", content: "Forever\n\nAmong billions of people in this world, my heart chose you. If I had another life, I'd search for you again. I'd fall in love with you again. And I'd still choose you, every single time.\n\nHappy 20th Birthday, my angel. Thank you for making my life beautiful. I love you more than words will ever be able to express." }
   ];
 
   const handleOpenGift = (gift) => {
@@ -1633,6 +1642,122 @@ function HeartCatcherGame() {
           </button>
         </div>
       )}
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// RELATIONSHIP COUNTER APP [NEW]
+// ----------------------------------------------------
+function RelationshipCounterApp() {
+  const [timeDiff, setTimeDiff] = useState({
+    years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0,
+    totalDays: 0, totalHours: 0, totalMinutes: 0, totalSeconds: 0
+  });
+
+  useEffect(() => {
+    const calculateTime = () => {
+      const start = new Date("2022-12-10T18:55:00");
+      const now = new Date();
+      const diffMs = now - start;
+
+      let years = now.getFullYear() - start.getFullYear();
+      let months = now.getMonth() - start.getMonth();
+      let days = now.getDate() - start.getDate();
+      let hours = now.getHours() - start.getHours();
+      let minutes = now.getMinutes() - start.getMinutes();
+      let seconds = now.getSeconds() - start.getSeconds();
+
+      if (seconds < 0) {
+        minutes -= 1;
+        seconds += 60;
+      }
+      if (minutes < 0) {
+        hours -= 1;
+        minutes += 60;
+      }
+      if (hours < 0) {
+        days -= 1;
+        hours += 60;
+      }
+      if (days < 0) {
+        const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += prevMonth.getDate();
+        months -= 1;
+      }
+      if (months < 0) {
+        years -= 1;
+        months += 12;
+      }
+
+      const totalDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const totalHours = Math.floor(diffMs / (1000 * 60 * 60));
+      const totalMinutes = Math.floor(diffMs / (1000 * 60));
+      const totalSeconds = Math.floor(diffMs / 1000);
+
+      setTimeDiff({
+        years, months, days, hours, minutes, seconds,
+        totalDays, totalHours, totalMinutes, totalSeconds
+      });
+    };
+
+    calculateTime();
+    const interval = setInterval(calculateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="retro-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', border: '2px solid var(--shadow-dark)', padding: '12px', justifyContent: 'space-between', backgroundColor: '#fffbfb' }}>
+      <div style={{ textAlign: 'center', borderBottom: '2px dashed var(--pixel-pink)', paddingBottom: '6px', marginBottom: '8px' }}>
+        <h4 style={{ fontFamily: 'var(--font-pixel)', fontSize: '10px', color: 'var(--pixel-red)', display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
+          <span className="heart-beat">❤️</span> TOGETHER SINCE 10.12.2022 <span className="heart-beat">❤️</span>
+        </h4>
+        <p style={{ fontSize: '9px', color: '#666', marginTop: '2.5px', fontStyle: 'italic' }}>
+          Started at 06:55 PM on our special day
+        </p>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '10px' }}>
+        <div style={{ backgroundColor: '#ffdce3', border: '1.5px solid #000', borderRadius: '4px', padding: '6px', textAlign: 'center' }}>
+          <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--pixel-red)' }}>{timeDiff.years}</div>
+          <div style={{ fontSize: '8.5px', fontFamily: 'var(--font-pixel)', color: '#444', marginTop: '2px' }}>Years</div>
+        </div>
+        <div style={{ backgroundColor: '#ffdce3', border: '1.5px solid #000', borderRadius: '4px', padding: '6px', textAlign: 'center' }}>
+          <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--pixel-red)' }}>{timeDiff.months}</div>
+          <div style={{ fontSize: '8.5px', fontFamily: 'var(--font-pixel)', color: '#444', marginTop: '2px' }}>Months</div>
+        </div>
+        <div style={{ backgroundColor: '#ffdce3', border: '1.5px solid #000', borderRadius: '4px', padding: '6px', textAlign: 'center' }}>
+          <div style={{ fontSize: '18px', fontWeight: 'bold', color: 'var(--pixel-red)' }}>{timeDiff.days}</div>
+          <div style={{ fontSize: '8.5px', fontFamily: 'var(--font-pixel)', color: '#444', marginTop: '2px' }}>Days</div>
+        </div>
+        <div style={{ backgroundColor: '#fff5f7', border: '1.5px solid #000', borderRadius: '4px', padding: '6px', textAlign: 'center' }}>
+          <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#be185d' }}>{timeDiff.hours}</div>
+          <div style={{ fontSize: '8.5px', fontFamily: 'var(--font-pixel)', color: '#444', marginTop: '2px' }}>Hours</div>
+        </div>
+        <div style={{ backgroundColor: '#fff5f7', border: '1.5px solid #000', borderRadius: '4px', padding: '6px', textAlign: 'center' }}>
+          <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#be185d' }}>{timeDiff.minutes}</div>
+          <div style={{ fontSize: '8.5px', fontFamily: 'var(--font-pixel)', color: '#444', marginTop: '2px' }}>Minutes</div>
+        </div>
+        <div style={{ backgroundColor: '#fff5f7', border: '1.5px solid #000', borderRadius: '4px', padding: '6px', textAlign: 'center' }}>
+          <div style={{ fontSize: '18px', fontWeight: 'bold', color: '#be185d' }} className="heart-beat">{timeDiff.seconds}</div>
+          <div style={{ fontSize: '8.5px', fontFamily: 'var(--font-pixel)', color: '#444', marginTop: '2px' }}>Seconds</div>
+        </div>
+      </div>
+
+      <div style={{ background: '#f8fafc', border: '1px inset #ccc', borderRadius: '4px', padding: '8px', fontSize: '11px', display: 'flex', flexDirection: 'column', gap: '4px', color: '#334155' }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span>Total Days:</span>
+          <strong>{timeDiff.totalDays.toLocaleString()} days</strong>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span>Total Hours:</span>
+          <strong>{timeDiff.totalHours.toLocaleString()} hours</strong>
+        </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <span>Total Seconds:</span>
+          <strong style={{ color: 'var(--pixel-red)' }}>{timeDiff.totalSeconds.toLocaleString()} s</strong>
+        </div>
+      </div>
     </div>
   );
 }
