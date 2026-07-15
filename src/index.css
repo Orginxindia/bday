@@ -936,30 +936,27 @@ body {
   }
 
   .desktop-workspace {
-    padding: 45px 8px 85px 8px !important; /* Left space for horizontal sidebar, top space for taskbar */
+    padding: 45px 5px 10px 80px !important; /* Left space for responsive vertical sidebar */
   }
 
-  /* 2. Horizontal scrollable dock for sidebar shortcuts */
+  /* 2. Vertical scrollable left sidebar for mobile */
   .desktop-sidebar {
     position: absolute !important;
+    top: 45px !important;
     bottom: 5px !important;
-    top: auto !important;
     left: 5px !important;
-    right: 5px !important;
-    flex-direction: row !important;
-    overflow-x: auto !important;
-    overflow-y: hidden !important;
-    width: auto !important;
-    height: 78px !important;
-    gap: 8px !important;
-    background-color: rgba(255, 255, 255, 0.95) !important;
-    border: 2px solid var(--shadow-darker) !important;
-    border-radius: 6px !important;
-    padding: 2px 6px !important;
+    width: 70px !important;
+    height: auto !important;
+    flex-direction: column !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    gap: 6px !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    padding: 2px 0 !important;
     z-index: 4500 !important;
-    box-shadow: 0px -4px 15px rgba(0,0,0,0.15) !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
+    box-shadow: none !important;
     scrollbar-width: none !important; /* Firefox */
   }
 
@@ -968,22 +965,22 @@ body {
   }
 
   .desktop-icon-btn {
-    width: 60px !important;
+    width: 66px !important;
     height: 70px !important;
     flex-shrink: 0 !important;
   }
 
   .desktop-icon-btn span {
     font-size: 7.5px !important;
-    max-width: 58px !important;
+    max-width: 64px !important;
   }
 
-  /* 3. Maximized Windows for mobile comfort */
+  /* 3. Maximized Windows to the right of the sidebar */
   .retro-window {
-    width: calc(100vw - 12px) !important;
-    height: calc(100vh - 135px) !important; /* Leaves taskbar (35px) and dock (80px) visible */
-    left: 6px !important;
-    top: 40px !important;
+    width: calc(100vw - 92px) !important; /* Opens to the right of the sidebar */
+    height: calc(100vh - 55px) !important; /* Fills screen height, leaves taskbar (35px) and safe zone */
+    left: 86px !important;
+    top: 45px !important;
     transform: none !important;
   }
 
