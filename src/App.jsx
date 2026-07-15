@@ -100,18 +100,16 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  // 4. Floating Flower Petals Generator
+  // 4. Floating Flower Petals Generator (Rain effect)
   useEffect(() => {
-    if (!isGardenBloomed) return;
-
-    // Spawn falling petals continuously
     const spawnPetal = () => {
       const newPetal = {
         id: Math.random(),
         x: Math.random() * window.innerWidth,
-        color: ['#fbcfe8', '#fecdd3', '#fda4af', '#fca5a5'][Math.floor(Math.random() * 4)],
-        size: Math.random() * 10 + 8,
-        drift: Math.random() * 150 - 75
+        color: ['#fee2e2', '#fecaca', '#fca5a5', '#dc2626', '#ffffff'][Math.floor(Math.random() * 5)],
+        size: Math.random() * 12 + 10,
+        drift: Math.random() * 120 - 60,
+        char: Math.random() > 0.4 ? '❤️' : '🌸'
       };
 
       setPetals(prev => [...prev, newPetal]);
@@ -121,9 +119,9 @@ export default function App() {
       }, 6000);
     };
 
-    const interval = setInterval(spawnPetal, 400);
+    const interval = setInterval(spawnPetal, 180); // dense like rain
     return () => clearInterval(interval);
-  }, [isGardenBloomed]);
+  }, []);
 
   // Login click Ok handler
   const handleLoginSubmit = (e) => {
@@ -221,11 +219,18 @@ export default function App() {
             top: '-20px',
             width: `${p.size}px`,
             height: `${p.size}px`,
-            opacity: 0.8,
-            '--x': `${p.drift}px`
+            opacity: 0.85,
+            '--x': `${p.drift}px`,
+            color: p.color,
+            fontSize: `${p.size}px`,
+            lineHeight: 1,
+            position: 'fixed',
+            zIndex: 9998,
+            pointerEvents: 'none',
+            userSelect: 'none'
           }}
         >
-          <Heart size={p.size} fill={p.color} color="none" />
+          {p.char}
         </div>
       ))}
 
@@ -375,7 +380,7 @@ export default function App() {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#9fb8d4',
+            backgroundColor: 'var(--bg-retro)',
             zIndex: 5100
           }}
         >

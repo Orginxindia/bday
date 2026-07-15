@@ -1,19 +1,19 @@
 :root {
-  /* Retro Colors */
-  --bg-retro: #9fb8d4; /* Custom Periwinkle Blue from mockup */
-  --window-bg: #ece9d8;
-  --window-text: #000000;
+  /* Retro Colors - Red and White Theme */
+  --bg-retro: #ef4444; /* Vibrant Red Desktop */
+  --window-bg: #ffffff; /* Clean White Windows */
+  --window-text: #1a1a1a;
   
-  --pixel-red: #db2777; /* Deep Pink from mockup */
-  --pixel-red-dark: #be185d;
-  --pixel-pink: #fbcfe8;
-  --pixel-pink-light: #ffd3dc; /* Pink button background from mockup */
-  --pixel-blue: #2f5687; /* Navy blue header from mockup */
-  --pixel-blue-light: #4c82c2;
+  --pixel-red: #dc2626; /* Deep Red accents */
+  --pixel-red-dark: #991b1b;
+  --pixel-pink: #ffe4e6; /* Soft red-white highlights */
+  --pixel-pink-light: #fee2e2;
+  --pixel-blue: #dc2626; /* Red Title Bar */
+  --pixel-blue-light: #f87171;
   
   --shadow-light: #ffffff;
-  --shadow-dark: #808080;
-  --shadow-darker: #404040;
+  --shadow-dark: #cccccc;
+  --shadow-darker: #777777;
 
   /* Fonts */
   --font-pixel: 'Press Start 2P', monospace;
@@ -254,7 +254,7 @@ body {
   left: 0;
   width: 100%;
   height: 35px;
-  background: linear-gradient(90deg, #102e5a, #2b558c);
+  background: linear-gradient(90deg, var(--pixel-blue), var(--pixel-blue-light));
   border-bottom: 3px solid var(--shadow-darker);
   display: flex;
   align-items: center;
@@ -426,8 +426,8 @@ body {
   height: 100%;
   background: repeating-linear-gradient(
     90deg,
-    #1084d0 0px,
-    #1084d0 8px,
+    var(--pixel-red) 0px,
+    var(--pixel-red) 8px,
     #000 8px,
     #000 12px
   );
@@ -439,7 +439,7 @@ body {
 .login-screen {
   position: fixed;
   top: 0; left: 0; width: 100%; height: 100%;
-  background-color: #9fb8d4;
+  background-color: var(--bg-retro);
   display: flex;
   justify-content: center;
   align-items: center;
