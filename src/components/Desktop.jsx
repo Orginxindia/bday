@@ -934,6 +934,9 @@ function VirtualGardenApp({ onGardenBloom }) {
   const [waterCount, setWaterCount] = useState(15);
 
   const waterPlant = (id) => {
+    const targetSlot = garden.find(slot => slot.id === id);
+    if (targetSlot && targetSlot.state === 'bloom') return; // Do not waste water if already bloomed!
+
     if (waterCount <= 0) return;
     sound.playWater();
     setWaterCount(prev => prev - 1);
@@ -1042,7 +1045,17 @@ function VirtualGardenApp({ onGardenBloom }) {
             <div style={{ fontSize: '26px' }}>🛢️</div>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <span style={{ fontSize: '10px', fontWeight: 'bold', color: '#333' }}>Water Can</span>
-              <span style={{ fontSize: '9px', color: '#555', fontFamily: 'var(--font-pixel)', fontSize: '7px' }}>💧 x {waterCount}</span>
+              {waterCount === 0 && !allBloomed ? (
+                <button 
+                  className="retro-button"
+                  onClick={() => { sound.playSuccess(); setWaterCount(15); }}
+                  style={{ fontSize: '7px', padding: '2px 4px', fontFamily: 'var(--font-pixel)', marginTop: '2px', cursor: 'pointer' }}
+                >
+                  Refill 💧
+                </button>
+              ) : (
+                <span style={{ color: '#555', fontFamily: 'var(--font-pixel)', fontSize: '7px' }}>💧 x {waterCount}</span>
+              )}
             </div>
           </div>
 
