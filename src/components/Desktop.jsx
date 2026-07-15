@@ -15,7 +15,8 @@ import {
   SkipBack,
   Sparkles,
   Clock,
-  Folder
+  Folder,
+  Award
 } from 'lucide-react';
 import { sound } from './SoundManager';
 import posterImg from '../assets/poster.jpg';
@@ -193,7 +194,8 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
     reasons: false,
     forever: false,
     counter: false,
-    poster: false
+    poster: false,
+    certificate: false
   });
   
   const [minimizedWindows, setMinimizedWindows] = useState({});
@@ -366,6 +368,7 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
         <DesktopIcon title="Forever Folder" icon={Folder} onClick={() => openWindow('forever')} isOpen={openWindows.forever} style={{ color: '#10b981' }} />
         <DesktopIcon title="Love Counter" icon={Heart} onClick={() => openWindow('counter')} isOpen={openWindows.counter} style={{ color: '#ec4899' }} />
         <DesktopIcon title="Sadhu's Poster" icon={Sparkles} onClick={() => openWindow('poster')} isOpen={openWindows.poster} style={{ color: '#f59e0b' }} />
+        <DesktopIcon title="Wife Award" icon={Award} onClick={() => openWindow('certificate')} isOpen={openWindows.certificate} style={{ color: '#ea580c' }} />
         
         <DesktopIcon title="Recycle Bin" icon={Trash2} onClick={() => openWindow('recycle')} isOpen={openWindows.recycle} style={{ color: '#888' }} />
       </div>
@@ -578,6 +581,13 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
               }} 
             />
           </div>
+        </DesktopWindow>
+      )}
+
+      {/* Certificate Window [NEW] */}
+      {openWindows.certificate && !minimizedWindows.certificate && (
+        <DesktopWindow id="certificate" title="wife_award.exe" icon={Award} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={180} initialY={100} width="580px" height="520px">
+          <WifeCertificateApp />
         </DesktopWindow>
       )}
 
@@ -1861,6 +1871,92 @@ function RelationshipCounterApp() {
           <span>Total Seconds:</span>
           <strong style={{ color: 'var(--pixel-red)' }}>{timeDiff.totalSeconds.toLocaleString()} s</strong>
         </div>
+      </div>
+    </div>
+  );
+}
+
+// ----------------------------------------------------
+// WIFE CERTIFICATE APP [NEW]
+// ----------------------------------------------------
+function WifeCertificateApp() {
+  const handlePrint = () => {
+    sound.playClick();
+    window.print();
+  };
+
+  return (
+    <div className="retro-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', border: '2px solid var(--shadow-dark)', padding: '12px', justifyContent: 'space-between', backgroundColor: '#fffdf9' }}>
+      <div 
+        id="certificate-print-area"
+        style={{
+          border: '6px double var(--pixel-red)',
+          padding: '20px 15px',
+          textAlign: 'center',
+          backgroundColor: '#fffcf5',
+          position: 'relative',
+          flexGrow: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          borderRadius: '4px'
+        }}
+      >
+        {/* Certificate Decorations */}
+        <div style={{ position: 'absolute', top: '10px', left: '10px', fontSize: '14px', color: 'var(--pixel-red)' }}>✿</div>
+        <div style={{ position: 'absolute', top: '10px', right: '10px', fontSize: '14px', color: 'var(--pixel-red)' }}>✿</div>
+        <div style={{ position: 'absolute', bottom: '10px', left: '10px', fontSize: '14px', color: 'var(--pixel-red)' }}>✿</div>
+        <div style={{ position: 'absolute', bottom: '10px', right: '10px', fontSize: '14px', color: 'var(--pixel-red)' }}>✿</div>
+
+        <div style={{ fontSize: '38px', color: '#eab308' }} className="heart-beat">🏆</div>
+        
+        <h2 style={{ fontFamily: 'var(--font-pixel)', fontSize: '11px', color: 'var(--pixel-red)', letterSpacing: '1px', marginTop: '10px', marginBottom: '8px' }}>
+          OFFICIAL DECLARATION OF LOVE
+        </h2>
+        
+        <h1 style={{ fontFamily: 'var(--font-sans)', fontSize: '24px', fontWeight: '800', color: '#1a1a1a', margin: '5px 0' }}>
+          Best Wife of the Decade Award
+        </h1>
+        
+        <p style={{ fontSize: '11px', color: '#555', fontStyle: 'italic', marginBottom: '20px' }}>
+          Presented to the most beautiful girl in the universe as she steps into her twenties
+        </p>
+
+        <div style={{ borderBottom: '2.5px dashed var(--pixel-pink)', width: '70%', margin: '10px auto', paddingBottom: '4px' }}>
+          <span style={{ fontFamily: 'var(--font-sans)', fontSize: '20px', fontWeight: 'bold', color: 'var(--pixel-red)' }}>
+            Golduhhhh (Sadhu) ❤️
+          </span>
+        </div>
+
+        <p style={{ fontSize: '11.5px', color: '#333', lineHeight: '1.6', maxWidth: '380px', margin: '15px auto 25px auto', fontFamily: 'var(--font-sans)', fontWeight: '500' }}>
+          \"For having the most infectious laugh, throwing the cutest dramatic fights, believing in me when I couldn't, and being the best future wife I could have ever dreamed of.\"
+        </p>
+
+        <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%', marginTop: '10px', gap: '20px' }}>
+          <div style={{ textAlign: 'center' }}>
+            <span style={{ fontSize: '9px', display: 'block', color: '#666' }}>DATE OF ISSUANCE</span>
+            <strong style={{ fontSize: '11px', borderTop: '1px solid #333', paddingTop: '4px', display: 'block', width: '100px', margin: '4px auto 0 auto' }}>
+              16.07.2026
+            </strong>
+          </div>
+          <div style={{ textAlign: 'center' }}>
+            <span style={{ fontSize: '9px', display: 'block', color: '#666' }}>ISSUED BY</span>
+            <strong style={{ fontSize: '11.5px', borderTop: '1px solid #333', paddingTop: '4px', display: 'block', width: '120px', margin: '4px auto 0 auto', fontFamily: 'var(--font-sans)', fontStyle: 'italic', color: 'var(--pixel-red)' }}>
+              Dharani ❤️
+            </strong>
+          </div>
+        </div>
+      </div>
+
+      <div style={{ display: 'flex', gap: '10px', justifyContent: 'center', marginTop: '10px' }}>
+        <button 
+          className="retro-button primary" 
+          onClick={handlePrint}
+          style={{ fontSize: '11px', padding: '6px 20px', cursor: 'pointer' }}
+        >
+          🖨️ Print Certificate
+        </button>
       </div>
     </div>
   );

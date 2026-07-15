@@ -1061,3 +1061,24 @@ body {
     max-width: 320px !important;
   }
 }
+
+/* Print Certificate Styling */
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+  #certificate-print-area, #certificate-print-area * {
+    visibility: visible !important;
+  }
+  #certificate-print-area {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    border: 8px double #dc2626 !important;
+    background-color: #fff !important;
+    padding: 40px !important;
+    box-shadow: none !important;
+  }
+}
