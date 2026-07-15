@@ -296,6 +296,11 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
     }
   };
 
+  const letterWidth = window.innerWidth > 680 ? 640 : Math.floor(window.innerWidth * 0.9);
+  const letterHeight = window.innerHeight > 680 ? 530 : Math.floor(window.innerHeight * 0.82);
+  const letterX = window.innerWidth > 680 ? Math.floor((window.innerWidth - letterWidth) / 2) : 10;
+  const letterY = window.innerHeight > 680 ? Math.floor((window.innerHeight - letterHeight) / 2) : 65;
+
   return (
     <div 
       className="desktop-workspace"
@@ -423,7 +428,7 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
 
       {/* love_letter.txt */}
       {openWindows.letter && !minimizedWindows.letter && (
-        <DesktopWindow id="letter" title="love_letter.txt" icon={MessageSquare} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={280} initialY={75} width="580px" height="480px">
+        <DesktopWindow id="letter" title="love_letter.txt" icon={MessageSquare} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={letterX} initialY={letterY} width={`${letterWidth}px`} height={`${letterHeight}px`}>
           <LoveLetterApp onReadLetter={handleReadLetter} />
         </DesktopWindow>
       )}
@@ -665,8 +670,8 @@ function LoveLetterApp({ onReadLetter }) {
       <div 
         className={!isDone ? "typing-cursor" : ""}
         style={{ 
-          textAlign: 'left', width: '100%', fontSize: '15.5px', fontWeight: 400,
-          color: '#2a2a2a', lineHeight: '1.65', marginBottom: isDone ? '15px' : '0px'
+          textAlign: 'left', width: '100%', fontSize: '17px', fontWeight: 600,
+          color: '#1a1a1a', lineHeight: '1.75', marginBottom: isDone ? '15px' : '0px'
         }}
       >
         {renderFormattedText(displayText)}
