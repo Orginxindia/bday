@@ -281,7 +281,7 @@ export default function BirthdayCake({ onRestart }) {
               style={{ marginTop: '10px', fontSize: '9px', display: 'flex', gap: '6px', alignItems: 'center' }}
             >
               <RefreshCw size={10} />
-              <span>Explore LoveOS Again</span>
+              <span>Explore sadhu's 20's Again</span>
             </button>
           </div>
         </div>

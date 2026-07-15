@@ -18,6 +18,7 @@ import {
   Folder
 } from 'lucide-react';
 import { sound } from './SoundManager';
+import posterImg from '../assets/poster.jpg';
 
 // Custom flower SVGs matching the mockup
 const SproutSVG = () => (
@@ -191,7 +192,8 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
     dreams: false,
     reasons: false,
     forever: false,
-    counter: false
+    counter: false,
+    poster: false
   });
   
   const [minimizedWindows, setMinimizedWindows] = useState({});
@@ -315,7 +317,7 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
       {/* 1. TOP SYSTEM BAR */}
       <div className="retro-taskbar">
         <div className="taskbar-left">
-          <span>💖 LOVE OS v2.0 - Built with endless love 💕</span>
+          <span>💖 sadhu's 20's ❤️</span>
         </div>
         <div className="taskbar-right">
           <div 
@@ -356,6 +358,7 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
         <DesktopIcon title="I Love You" icon={Heart} onClick={() => openWindow('reasons')} isOpen={openWindows.reasons} style={{ color: '#ef4444' }} />
         <DesktopIcon title="Forever Folder" icon={Folder} onClick={() => openWindow('forever')} isOpen={openWindows.forever} style={{ color: '#10b981' }} />
         <DesktopIcon title="Love Counter" icon={Heart} onClick={() => openWindow('counter')} isOpen={openWindows.counter} style={{ color: '#ec4899' }} />
+        <DesktopIcon title="Sadhu's Poster" icon={Sparkles} onClick={() => openWindow('poster')} isOpen={openWindows.poster} style={{ color: '#f59e0b' }} />
         
         <DesktopIcon title="Recycle Bin" icon={Trash2} onClick={() => openWindow('recycle')} isOpen={openWindows.recycle} style={{ color: '#888' }} />
       </div>
@@ -550,6 +553,24 @@ export default function Desktop({ onTriggerBSOD, onGardenBloom, isMuted, setIsMu
       {openWindows.counter && !minimizedWindows.counter && (
         <DesktopWindow id="counter" title="love_counter.exe" icon={Heart} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={200} initialY={160} width="400px" height="340px">
           <RelationshipCounterApp />
+        </DesktopWindow>
+      )}
+
+      {/* Poster Window [NEW] */}
+      {openWindows.poster && !minimizedWindows.poster && (
+        <DesktopWindow id="poster" title="sadhu_poster.jpg" icon={Sparkles} onClose={closeWindow} onMinimize={minimizeWindow} activeWindow={activeWindow} setActiveWindow={setActiveWindow} initialX={160} initialY={80} width="580px" height="520px">
+          <div className="retro-panel" style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto', padding: '10px', alignItems: 'center', backgroundColor: '#fff' }}>
+            <img 
+              src={posterImg} 
+              alt="Birthday Poster" 
+              style={{ 
+                width: '100%', 
+                height: 'auto', 
+                border: '3px double #000', 
+                boxShadow: '3px 3px 0px rgba(0,0,0,0.1)' 
+              }} 
+            />
+          </div>
         </DesktopWindow>
       )}
 
@@ -1387,11 +1408,11 @@ function ForeverFolderApp({ onTriggerBSOD }) {
           <div style={{ color: 'var(--pixel-red)', fontSize: '26px' }} className="heart-beat">💍</div>
           <div>
             <h4 style={{ fontWeight: 'bold', color: 'var(--pixel-red)', fontSize: '14px', marginBottom: '8px' }}>
-              LoveOS Secret Folder Unlocked!
+              sadhu's 20's Secret Folder Unlocked!
             </h4>
             <p style={{ fontSize: '12px', color: '#444', lineHeight: '1.4' }}>
               You found my final secret. Inside represents all our future milestones.<br />
-              Click the button below to complete LoveOS...
+              Click the button below to complete sadhu's 20's...
             </p>
           </div>
 

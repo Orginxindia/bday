@@ -286,7 +286,7 @@ export default function App() {
       {gameState === 'boot' && (
         <div className="boot-screen">
           <div className="boot-logo-box">
-            <h1 className="boot-logo-text">LoveOS</h1>
+            <h1 className="boot-logo-text">sadhu's 20's</h1>
             <div style={{ fontSize: '8px', color: '#c0c0c0', borderTop: '1px solid #c0c0c0', paddingTop: '4px' }}>
               SYSTEM VERSION 20.0
             </div>
@@ -317,7 +317,7 @@ export default function App() {
               <div style={{ display: 'flex', gap: '15px', alignItems: 'flex-start', marginBottom: '15px' }}>
                 <div style={{ fontSize: '28px' }} className="heart-beat">🔑</div>
                 <div>
-                  <p style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '4px' }}>Welcome to LoveOS v20.0</p>
+                  <p style={{ fontSize: '13px', fontWeight: 'bold', marginBottom: '4px' }}>Welcome to sadhu's 20's</p>
                   <p style={{ fontSize: '11px', color: '#555' }}>Please log on to connect to Dharani's heart.</p>
                 </div>
               </div>
@@ -408,7 +408,7 @@ export default function App() {
       {gameState === 'bsod' && (
         <div className="bsod-screen" onClick={exitBSOD}>
           <div>
-            <div className="bsod-text-center">LoveOS</div>
+            <div className="bsod-text-center">sadhu's 20's</div>
             <p>A fatal exception 0xLOVE2026 has occurred at memory segment DHARANI_HEART.</p>
             <p>The current system session has collapsed due to an overload of cute memories.</p>
             <br />
